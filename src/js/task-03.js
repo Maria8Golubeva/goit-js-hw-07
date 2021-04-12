@@ -17,29 +17,51 @@ const images = [
 ];
 
 const imagesContainer = document.querySelector('#gallery');
-const elements = images.map(image => {
-    const imageEl = document.createElement('li');
-    imageEl.classList.add('image-style');
-    imageEl.insertAdjacentHTML('afterbegin', `<img src="${image.url}" alt = "${image.alt}"></img>`);
-    imageEl.style.width = '460px';
-    imageEl.style.margin = '4px';
 
-    return imageEl;
-});
+// const elements = images.map(image => {
+//     const imageEl = document.createElement('li');
+//     imageEl.classList.add('image-style');
+//     imageEl.insertAdjacentHTML('afterbegin', `<img src="${image.url}" alt = "${image.alt}"></img>`);
+//     imageEl.style.width = '460px';
+//     imageEl.style.margin = '4px';
 
-imagesContainer.append(...elements);
+//     return imageEl;
+// });
+// imagesContainer.append(...elements);
 
-const galleryStyle = document.querySelector('style');
-galleryStyle.insertAdjacentHTML('beforeend',
-    `#gallery {
-        display: flex;
-        list-style: none;
-    }`);
+// const galleryStyle = document.querySelector('style');
+// galleryStyle.insertAdjacentHTML('beforeend',
+//     `#gallery {
+//         display: flex;
+//         list-style: none;
+//     }`);
 
-const imageStyle = document.querySelector('style');
-imageStyle.insertAdjacentHTML('beforeend', 
-    `img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-      }`)
+// const imageStyle = document.querySelector('style');
+// imageStyle.insertAdjacentHTML('beforeend', 
+//     `img {
+//         display: block;
+//         max-width: 100%;
+//         height: auto;
+//       }`)
+
+
+function createList(images) {
+  const newList = images.map(image => {
+    return `<li  style='list-style: none'><img src='${image.url}' alt='${image.alt}' class='image'></img></li>`
+  });
+
+  imagesContainer.insertAdjacentHTML(`beforeend`, newList.join(''));
+  
+// cтили
+  imagesContainer.style.padding = '0';
+  imagesContainer.style.display = 'flex';
+   
+  const imageEl = imagesContainer.querySelectorAll('.image');
+  imageEl.forEach(item => {
+    item.style.display = 'block';
+    item.style.maxWidth = '90%'
+  });
+
+};
+
+createList(images);

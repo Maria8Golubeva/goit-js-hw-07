@@ -8,13 +8,26 @@ const ingredients = [
 ];
 
 const ingredientsContainerEl = document.querySelector('#ingredients');
-const options = [];
 
-for (let ingredient of ingredients) {
+// const options = [];
+// for (let ingredient of ingredients) {
+//     const listEl = document.createElement('li');
+//     listEl.textContent = ingredient;
+
+//     options.push(listEl);
+// };
+
+// ingredientsContainerEl.append(...options);
+
+function createList(ingredients) {
+  
+  const newList = ingredients.map(ingredient => {
     const listEl = document.createElement('li');
     listEl.textContent = ingredient;
+    return listEl;
+  });
 
-    options.push(listEl);
+  ingredientsContainerEl.append(...newList);
 };
 
-ingredientsContainerEl.append(...options);
+createList(ingredients)
